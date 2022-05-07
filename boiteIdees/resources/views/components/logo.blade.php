@@ -1,0 +1,1 @@
+<img src="{{asset('img/boiteaIdee.jpg')}}" class="w-20 h-20 text-gray-500" {{$attributes}}>
