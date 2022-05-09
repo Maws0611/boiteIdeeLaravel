@@ -27,10 +27,10 @@ class IdeeController extends Controller
 
     public function store(Request $request)
      {
-        // $validation = $request->validate([
-        //     'titre' => ['required', 'string', 'max:255'],
-        //     'description' => ['required', 'string',],
-        // ]);
+        $validation = $request->validate([
+            'titre' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string',],
+        ]);
 
         $idee = new Idee();
         $idee->titre = $request->titre;
