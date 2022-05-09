@@ -16,6 +16,7 @@ use App\Http\Controllers\IdeeController;
 
 Route::get('/', function () {
     return view('welcome');
+    
 });
 
 Route::resource('idees', IdeeController::class);

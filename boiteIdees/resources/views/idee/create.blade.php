@@ -6,42 +6,49 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Boite à idée</title>
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
-<body>
- <x-auth-card>
-    <div class="bg-white shadow-lg max-w-lg md:flex ">
-      <x-slot name="logo">
-        <a href="/">
-            <x-logo/>
-        </a>
-    </x-slot>
-        <form method="post" action="{{ route('idees.store') }}">
+<body class=bg-gray-100>
+    <div class="bg-red-700 shadow-sm sm:rounded-lg">
+        <h1 class="text-center text-white font-bold">Boite à Idée</h1>
+    </div>
+<div class="d-flex justify-content-evenly">
+    <div class="col-6 pt-5">
+        <form method="post" action="{{ route('idees.store') }}" >
             @csrf
-
             <div class="p-4 flex-1 md:flex-col justify-center items-center"> 
                 <div class="mb-4">
-                    <label for="titre" class="block text-gray-600 mb-2">Titre</label>
-                    <input type="text" name="titre" class="border shadow-inner 
-                    py-2 px-3 text-gray-700 w-full ">
+                    <x-label for="titre" :value="__('Merci de donner un titre claire pour la categorisation')"/>
+                    <x-input id="titre" class="block mt-1 w-full" type="text" name="titre" :value="old('titre')" required autofocus />
                 </div>
                 <div class="mb-4">
-                    <label for="description" class="block text-gray-600 mb-2" >Description</label>
-                    <textarea class="border shadow-inner text-gray-700 w-full" name="description"></textarea>
+                    <x-label for="description" :value="__('Description')"/>
+                    <x-textarea  :value="old('description')"/>
                 </div>
                 <div class="mb-4">
-                    <select class="form-select" aria-label="Default select example" name="user_id">
-                        <option selected>Utilisateur</option>
+                    <select 
+                        class="form-select
+                        block mt-1 w-full
+                        rounded-md shadow-sm border-gray-300 focus:border-indigo-300 
+                        focus:ring focus:ring-indigo-200 focus:ring-opacity-50" 
+                        aria-label="Default select example" name="user_id" :value="old('user_id')">
+                    <option selected>Utilisateur</option>
                         @foreach ($users as $user)
-                          <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
                         @endforeach
-                      </select>
+                    </select>
                 </div>
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 
-                rounded over:bg-blue-600">Ajouter</button>
+                <x-button class=bg-red-900>
+                    {{ __("Ajouter") }}
+                </x-button>
             </div>
         </form>
- </div>
-</x-auth-card>
-    
+    </div>
+    <div class="col-6">
+        <img src="{{asset('img/idea.svg')}}" width="80%"/>
+    </div>
+</div>
 </body>
 </html>
+

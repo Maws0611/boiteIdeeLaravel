@@ -55,11 +55,11 @@ class IdeeController extends Controller
 
     public function update(Request $request, $id)
     {
-        // $validation = $request->validate([
-        //     'titre' => ['required', 'string', 'max:255'],
-        //     'description' => ['required', 'string',],
-        // ]); 
-        Idee::whereId($id)->update();
+        $validation = $request->validate([
+            'titre' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string',],
+        ]); 
+        Idee::whereId($id)->update($validation);
         return redirect('/idees');
     }
 
